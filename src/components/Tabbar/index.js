@@ -43,7 +43,6 @@ function Tabbar({state, descriptors, navigation}) {
               navigation.navigate(route.name);
             }
           };
-
           return (
             <TouchableOpacity
               key={label}
@@ -53,46 +52,81 @@ function Tabbar({state, descriptors, navigation}) {
               {label === 'HomeStack' && (
                 <View style={[s.tabItem]}>
                   <Home
-                    width={gh(35)}
-                    height={gh(35)}
+                    width={gh(30)}
+                    height={gh(30)}
                     fill={isFocused ? 'orange' : 'black'}
                   />
+                  <Text
+                    style={[
+                      s.tabText,
+                      {color: isFocused ? 'orange' : 'black'},
+                    ]}>
+                    Anasayfa
+                  </Text>
                 </View>
               )}
               {label === 'Categories' && (
                 <View style={[s.tabItem]}>
                   <Search
-                    width={gh(35)}
-                    height={gh(35)}
+                    width={gh(30)}
+                    height={gh(30)}
                     fill={isFocused ? 'orange' : 'black'}
                   />
+                  <Text
+                    style={[
+                      s.tabText,
+                      {color: isFocused ? 'orange' : 'black'},
+                    ]}>
+                    Kategoriler
+                  </Text>
                 </View>
               )}
               {label === 'Basket' && (
                 <View style={[s.tabItem]}>
                   <Basket
-                    width={gh(35)}
-                    height={gh(35)}
+                    width={gh(30)}
+                    height={gh(30)}
                     fill={isFocused ? 'orange' : 'black'}
                   />
+                  <Text
+                    style={[
+                      s.tabText,
+                      {color: isFocused ? 'orange' : 'black'},
+                    ]}>
+                    Sepetim
+                  </Text>
                 </View>
               )}
               {label === 'Favorites' && (
                 <View style={[s.tabItem]}>
                   <Heart
-                    width={gh(35)}
-                    height={gh(35)}
+                    width={gh(30)}
+                    height={gh(30)}
                     fill={isFocused ? 'orange' : 'black'}
                   />
+                  <Text
+                    style={[
+                      s.tabText,
+                      {color: isFocused ? 'orange' : 'black'},
+                    ]}>
+                    Favorilerim
+                  </Text>
                 </View>
               )}
               {label === 'Account' && (
                 <View style={[s.tabItem]}>
                   <User
-                    width={gh(35)}
-                    height={gh(35)}
+                    width={gh(30)}
+                    height={gh(30)}
                     fill={isFocused ? 'orange' : 'black'}
                   />
+                  <Text
+                    style={[
+                      s.tabText,
+                      {color: isFocused ? 'orange' : 'black'},
+                    ]}>
+                    Hesabım
+                  </Text>
                 </View>
               )}
             </TouchableOpacity>
@@ -123,10 +157,13 @@ const s = StyleSheet.create({
       height: 4,
     },
     shadowOpacity: 1,
-    shadowRadius: 15,
+    shadowRadius: 5,
     elevation: 10,
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
+  },
+  tabText: {
+    fontSize: gh(12),
+    textAlign: 'center',
+    marginTop: gh(3),
   },
   tabItem: {
     display: 'flex',
@@ -151,10 +188,6 @@ const s = StyleSheet.create({
   },
 });
 
-const mapStateToProps = state => ({
-  tabbarvisible: state.tabbarvisible,
-  userpremium: state.userpremium,
-  homedata: state.homedata,
-});
+const mapStateToProps = state => ({});
 
 export default connect(mapStateToProps)(Tabbar);
