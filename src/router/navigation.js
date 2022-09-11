@@ -7,55 +7,28 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Tabbar from '../components/Tabbar';
 
 //App Stack
-const App = createBottomTabNavigator();
+const App = createNativeStackNavigator();
+// const App = createBottomTabNavigator();
 
-import {HomeStack} from './Stacks/HomeStack';
-import Categories from '../screens/Categories';
+import {MainStack} from './Stacks/MainStack';
+import ProductDetail from '../screens/ProductDetail/index';
 import Basket from '../screens/Basket';
-import Favorites from '../screens/Favorites';
-import Account from '../screens/Account';
 
 class AppStack extends React.Component {
   render() {
     return (
-      <App.Navigator
-        initialRouteName={'HomeStack'}
-        tabBar={props => <Tabbar {...props} />}>
+      <App.Navigator initialRouteName={'MainStack'}>
         <App.Screen
-          name="HomeStack"
-          component={HomeStack}
+          name="MainStack"
+          component={MainStack}
           options={({route}) => ({
             animationEnabled: true,
             headerShown: false,
           })}
         />
         <App.Screen
-          name="Categories"
-          component={Categories}
-          options={({route}) => ({
-            animationEnabled: true,
-            headerShown: false,
-          })}
-        />
-        <App.Screen
-          name="Basket"
-          component={Basket}
-          options={({route}) => ({
-            animationEnabled: true,
-            headerShown: false,
-          })}
-        />
-        <App.Screen
-          name="Favorites"
-          component={Favorites}
-          options={({route}) => ({
-            animationEnabled: true,
-            headerShown: false,
-          })}
-        />
-        <App.Screen
-          name="Account"
-          component={Account}
+          name="ProductDetail"
+          component={ProductDetail}
           options={({route}) => ({
             animationEnabled: true,
             headerShown: false,

@@ -14,8 +14,12 @@ import {getBottomSpace} from '../Layout/getStatusBar';
 import {gh} from '../../utils/functions';
 import {Home, Search, Heart, User, Basket} from '../icons';
 import {connect, useSelector} from 'react-redux';
+import {theme} from '../../utils/theme/index';
 
 function Tabbar({state, descriptors, navigation}) {
+  const {basketItems} = useSelector(state => state.basket);
+  console.log(basketItems, 'ahey');
+  // console.log(basketItems);
   return (
     <View
       style={{
@@ -43,90 +47,44 @@ function Tabbar({state, descriptors, navigation}) {
               navigation.navigate(route.name);
             }
           };
+          let color = isFocused ? theme.main : theme.black;
           return (
             <TouchableOpacity
               key={label}
               style={s.tabWrapper}
               // onPress={label !== 'Folder' ? onPress : null}>
               onPress={onPress}>
-              {label === 'HomeStack' && (
+              {label === 'Home' && (
                 <View style={[s.tabItem]}>
-                  <Home
-                    width={gh(30)}
-                    height={gh(30)}
-                    fill={isFocused ? 'orange' : 'black'}
-                  />
-                  <Text
-                    style={[
-                      s.tabText,
-                      {color: isFocused ? 'orange' : 'black'},
-                    ]}>
-                    Anasayfa
-                  </Text>
+                  <Home width={gh(30)} height={gh(30)} fill={color} />
+                  <Text style={[s.tabText, {color}]}>Anasayfa</Text>
                 </View>
               )}
               {label === 'Categories' && (
                 <View style={[s.tabItem]}>
-                  <Search
-                    width={gh(30)}
-                    height={gh(30)}
-                    fill={isFocused ? 'orange' : 'black'}
-                  />
-                  <Text
-                    style={[
-                      s.tabText,
-                      {color: isFocused ? 'orange' : 'black'},
-                    ]}>
-                    Kategoriler
-                  </Text>
+                  <Search width={gh(30)} height={gh(30)} fill={color} />
+                  <Text style={[s.tabText, {color}]}>Kategoriler</Text>
                 </View>
               )}
               {label === 'Basket' && (
                 <View style={[s.tabItem]}>
-                  <Basket
-                    width={gh(30)}
-                    height={gh(30)}
-                    fill={isFocused ? 'orange' : 'black'}
-                  />
-                  <Text
-                    style={[
-                      s.tabText,
-                      {color: isFocused ? 'orange' : 'black'},
-                    ]}>
-                    Sepetim
-                  </Text>
+                  <View style={s.basketCount}>
+                    <Text style={s.basketText}>{basketItems.length}</Text>
+                  </View>
+                  <Basket width={gh(30)} height={gh(30)} fill={color} />
+                  <Text style={[s.tabText, {color}]}>Sepetim</Text>
                 </View>
               )}
               {label === 'Favorites' && (
                 <View style={[s.tabItem]}>
-                  <Heart
-                    width={gh(30)}
-                    height={gh(30)}
-                    fill={isFocused ? 'orange' : 'black'}
-                  />
-                  <Text
-                    style={[
-                      s.tabText,
-                      {color: isFocused ? 'orange' : 'black'},
-                    ]}>
-                    Favorilerim
-                  </Text>
+                  <Heart width={gh(30)} height={gh(30)} fill={color} />
+                  <Text style={[s.tabText, {color}]}>Favorilerim</Text>
                 </View>
               )}
               {label === 'Account' && (
                 <View style={[s.tabItem]}>
-                  <User
-                    width={gh(30)}
-                    height={gh(30)}
-                    fill={isFocused ? 'orange' : 'black'}
-                  />
-                  <Text
-                    style={[
-                      s.tabText,
-                      {color: isFocused ? 'orange' : 'black'},
-                    ]}>
-                    Hesabım
-                  </Text>
+                  <User width={gh(30)} height={gh(30)} fill={color} />
+                  <Text style={[s.tabText, {color}]}>Hesabım</Text>
                 </View>
               )}
             </TouchableOpacity>
@@ -164,6 +122,7 @@ const s = StyleSheet.create({
     fontSize: gh(12),
     textAlign: 'center',
     marginTop: gh(3),
+    fontWeight: 'bold',
   },
   tabItem: {
     display: 'flex',
@@ -171,13 +130,13 @@ const s = StyleSheet.create({
     width: '100%',
     height: '100%',
     justifyContent: 'center',
+    position: 'relative',
   },
   tabItemBlue: {
     display: 'flex',
     alignItems: 'center',
     width: '100%',
     height: gh(72),
-    // backgroundColor: theme.blue,
     borderRadius: 12,
   },
   tabWrapper: {
@@ -185,6 +144,23 @@ const s = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  basketCount: {
+    position: 'absolute',
+    top: 0,
+    left: gh(41), // icon + basket width / 2
+    width: gh(22),
+    height: gh(22),
+    backgroundColor: theme.main,
+    borderRadius: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 9999,
+  },
+  basketText: {
+    fontSize: gh(12),
+    color: theme.white,
+    fontWeight: 'bold',
   },
 });
 
