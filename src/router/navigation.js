@@ -1,18 +1,49 @@
 import React from 'react';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-
-//TABBAR
-import Tabbar from '../components/Tabbar';
 
 //App Stack
 const App = createNativeStackNavigator();
-// const App = createBottomTabNavigator();
+const ModalStack = createNativeStackNavigator();
 
+import {TouchableOpacity} from 'react-native';
 import {MainStack} from './Stacks/MainStack';
 import ProductDetail from '../screens/ProductDetail/index';
-import Basket from '../screens/Basket';
+import Filter from '../screens/Filter';
+import FilterDetail from '../screens/Filter/filterDetail';
+import {Close} from '../components/icons';
+import {theme} from '../utils/theme';
+import {gh} from '../utils/functions';
+import {navigationRef} from '../RootNavigation';
+
+const ModalStackView = () => (
+  <ModalStack.Navigator
+    screenOptions={{
+      headerShown: true,
+    }}>
+    <ModalStack.Screen
+      name="Filter"
+      component={Filter}
+      options={{
+        presentation: 'modal',
+        headerLeft: () => (
+          <TouchableOpacity onPress={() => navigationRef.goBack()}>
+            <Close fill={theme.black} width={gh(22)} height={gh(22)} />
+          </TouchableOpacity>
+        ),
+        // headerShown: false,
+      }}
+    />
+    <ModalStack.Screen
+      name="FilterDetail"
+      component={FilterDetail}
+      options={{
+        presentation: 'card',
+        // headerShown: false,
+      }}
+    />
+  </ModalStack.Navigator>
+);
 
 class AppStack extends React.Component {
   render() {
@@ -33,6 +64,14 @@ class AppStack extends React.Component {
             animationEnabled: true,
             headerShown: false,
           })}
+        />
+        <App.Screen
+          name="Filter"
+          component={ModalStackView}
+          options={{
+            presentation: 'modal',
+            headerShown: false,
+          }}
         />
       </App.Navigator>
     );

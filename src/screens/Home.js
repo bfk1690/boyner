@@ -17,6 +17,7 @@ import {getBottomSpace} from '../components/Layout/getStatusBar';
 import {theme} from '../utils/theme/index';
 import {ad} from '../redux/reducers/basket';
 import ProductItem from '../components/ProductItem';
+import {navigationRef} from '../RootNavigation';
 
 function Home(props) {
   const [products, setProducts] = useState([]);
@@ -41,6 +42,16 @@ function Home(props) {
 
   return (
     <SafeAreaView style={s.container}>
+      <View style={s.filter}>
+        <TouchableOpacity style={s.filterItem}>
+          <Text>Sırala</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigationRef.navigate('Filter')}
+          style={s.filterItem}>
+          <Text>Filtrele</Text>
+        </TouchableOpacity>
+      </View>
       {is_loading ? (
         <View style={s.loading}>
           <ActivityIndicator size={'small'} color={'orange'} />
@@ -68,6 +79,18 @@ const s = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  filter: {
+    flexDirection: 'row',
+    height: gh(50),
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  filterItem: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '50%',
+    height: '100%',
   },
 });
 

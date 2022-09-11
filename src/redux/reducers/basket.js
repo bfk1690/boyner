@@ -24,11 +24,17 @@ const basket = (state = defaultState, action) => {
 
     case 'REMOVE_FROM_BASKET':
       console.log(state.basketItems, 'BAKSANA');
-      return state.basketItems.length > 0
-        ? state.basketItems.filter(
+      if (state.basketItems.length > 0) {
+        return {
+          basketItems: state.basketItems.filter(
             basketItem => basketItem !== action.payload.basketItem,
-          )
-        : state;
+          ),
+        };
+      } else {
+        return {
+          ...state,
+        };
+      }
     default:
       return state;
   }

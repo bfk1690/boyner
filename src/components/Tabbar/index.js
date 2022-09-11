@@ -68,9 +68,12 @@ function Tabbar({state, descriptors, navigation}) {
               )}
               {label === 'Basket' && (
                 <View style={[s.tabItem]}>
-                  <View style={s.basketCount}>
-                    <Text style={s.basketText}>{basketItems.length}</Text>
-                  </View>
+                  {basketItems.length > 0 && (
+                    <View style={s.basketCount}>
+                      <Text style={s.basketText}>{basketItems.length}</Text>
+                    </View>
+                  )}
+
                   <Basket width={gh(30)} height={gh(30)} fill={color} />
                   <Text style={[s.tabText, {color}]}>Sepetim</Text>
                 </View>

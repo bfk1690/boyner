@@ -5,34 +5,31 @@ import {gh} from '../../utils/functions';
 import {theme} from '../../utils/theme';
 import {getBottomSpace} from '../Layout/getStatusBar';
 import CustomButton from '../CustomButton';
-import * as Actions from '../../redux/actions';
 
-export default function AddBasketCard({product}) {
+export default function ApproveBasketCard({totalDiscount}) {
   return (
     <View style={s.addBasketCard}>
       <View style={s.priceArea}>
-        <View style={s.discountRate}>
-          <Text style={s.discountText}>%{product.DiscountRate}</Text>
-        </View>
+        <Text style={s.total}>Toplam</Text>
         <View style={s.prices}>
-          <Text style={s.stickerPrice}>
-            {product.StickerPriceFormatted} {product.PriceCur}
-          </Text>
           <Text style={s.discountPrice}>
-            {product.DiscountPriceFormatted} {product.PriceCur}
+            {totalDiscount.toLocaleString('tr-TR', {
+              style: 'currency',
+              currency: 'TRY',
+            })}
           </Text>
         </View>
       </View>
       <View style={s.addBasket}>
         <CustomButton
-          text={'Sepete Ekle'}
+          text={'Sepeti Onayla'}
           backgroundColor={theme.main}
           width={'85%'}
           height={gh(60)}
           color={theme.white}
           fontSize={gh(16)}
           borderRadius={3}
-          onPress={() => Actions.addToBasket(product)}
+          onPress={() => alert('sepeti onayla')}
         />
       </View>
     </View>
@@ -60,40 +57,28 @@ const s = StyleSheet.create({
     justifyContent: 'space-between',
   },
   priceArea: {
-    width: '50%',
-    paddingLeft: gh(10),
-    flexDirection: 'row',
-    alignItems: 'center',
+    width: '35%',
+    paddingLeft: gh(20),
+    flexDirection: 'column',
   },
   addBasket: {
-    width: '50%',
+    width: '65%',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  discountRate: {
-    backgroundColor: '#E26050',
-    width: gh(55),
-    height: gh(40),
-    borderRadius: 3,
-    alignItems: 'center',
-    justifyContent: 'center',
+  total: {
+    fontSize: gh(16),
+    fontWeight: 'bold',
   },
+
   discountText: {
     fontWeight: 'bold',
     color: theme.white,
-  },
-  prices: {
-    marginLeft: gh(10),
   },
   discountPrice: {
     fontSize: gh(17),
     fontWeight: 'bold',
     color: theme.main,
-  },
-  stickerPrice: {
-    color: theme.gray,
-    textDecorationLine: 'line-through',
-    textDecorationColor: theme.gray,
-    fontSize: gh(15),
+    marginTop: gh(3),
   },
 });
