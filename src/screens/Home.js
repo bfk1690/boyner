@@ -14,13 +14,12 @@ import {gh} from '../utils/functions/index';
 import {connect, useSelector} from 'react-redux';
 import * as Actions from '../redux/actions';
 import {getBottomSpace} from '../components/Layout/getStatusBar';
-import {theme} from '../utils/theme/index';
-import {ad} from '../redux/reducers/basket';
 import ProductItem from '../components/ProductItem';
 import {navigationRef} from '../RootNavigation';
 
-function Home(props) {
+function Home() {
   const [products, setProducts] = useState([]);
+
   //redux
   const {is_loading} = useSelector(state => state.loading);
 
